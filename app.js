@@ -18,10 +18,42 @@ app.get('/', (req, res) => {
 });
 
 //Private Route - Rota Privada
+app.get("/user/:id", checkToken, async (req, res) => {
+    const id = req.params.id;
+    //check if users exists - checando usuário
+    const user = await User.findById(id, '-password')
+    if (!user) {
+        return res.status(404).json({ msg: "Usuário não encontrado" })
+    }
+
+    res.status(200).json({ user })
+})
+
+
+//Check Token - Verifica o Token
+function checkToken(req, res, next) {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(" ")[1]
+
+    if (!token) {
+        return res.status(401).json({ msg: "Acesso negado!" });
+    }
+    try {
+
+        const secret = process.env.SECRET
+        jwt.verify(token, secret);
+        next();
+
+    } catch (error) {
+        res.status(400).json({ msg: "Token inválido, hoje não amigo." });
+    }
+}
+
 
 //Register User - Registro de Usuário
 app.post('/auth/register', async (req, res) => {
     const { name, email, password, confirmPassword } = req.body
+    
     //Validations - Validações
     if (!name) {
         return res.status(422).json({ msg: "O nome é obrigatório!" })
@@ -56,11 +88,9 @@ app.post('/auth/register', async (req, res) => {
         await user.save();
         res.status(201).json({ msg: "Usuário criado com sucesso!" })
     } catch (error) {
-        res
-            .status(500)
-            .json({
-                msg: "Aconteceu um erro no servidor, tente novamente mais tarde!"
-            })
+        res.status(500).json({
+            msg: "Aconteceu um erro no servidor, tente novamente mais tarde!"
+        })
     }
 });
 
