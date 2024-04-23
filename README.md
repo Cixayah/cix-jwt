@@ -1,28 +1,41 @@
-Projeto API JWT em Node.js
+# Projeto API JWT em Node.js
 
-Instruções no Insomnia: 
+## Descrição
+Este projeto é uma API desenvolvida em Node.js que utiliza autenticação JWT (JSON Web Tokens). Ele fornece endpoints para registro de usuários, login e acesso a recursos protegidos.
 
-GET
-https://luck-royal-drum.glitch.me/
-----------------------------------
-POST / Registrar usuário
-https://luck-royal-drum.glitch.me/auth/register
+## Instruções de Uso
+
+### Insomnia
+Você pode importar as instruções de uso da API no Insomnia utilizando o arquivo `Insomnia_Requests.json` fornecido neste repositório.
+
+### Endpoints
+
+#### 1. Registrar usuário
+**POST** /auth/register
+
+
 {
-	"name": "Cix",
-	"email": "cix@dev.com",
-	"password": "cix123",
-	"confirmPassword": "cix123"
+  "name": "Cix",
+  "email": "cix@dev.com",
+  "password": "cix123",
+  "confirmPassword": "cix123"
 }
-----------------------------------
-POST / Login
-https://luck-royal-drum.glitch.me/auth/login
+
+
+#### 2. Login
+**POST** /auth/login
+
 {
-    "email": "cix@dev.com",
-	  "password": "cix123"
+  "email": "cix@dev.com",
+  "password": "cix123"
 }
-----------------------------------
-GET / usersId
+
+
+#### 3. Obter informações do usuário por ID
+**GET** /user/:userId
+
 https://luck-royal-drum.glitch.me/user/661fc5761a5ae791a4529637
-----------------------------------
 
-Projeto feito com muito carinho, uma realização eu diria. Obrigado por testar.
+
+## Agradecimentos
+Este projeto foi desenvolvido com muito carinho e dedicação. Obrigado por testar e contribuir!
