@@ -34,7 +34,7 @@ Você pode importar as instruções de uso da API no Insomnia utilizando o arqui
 #### 3. Obter informações do usuário por ID
 **GET** /user/:userId
 
-https://luck-royal-drum.glitch.me/user/661fc5761a5ae791a4529637
+cix-api.vercel.app
 
 
 ## Agradecimentos
