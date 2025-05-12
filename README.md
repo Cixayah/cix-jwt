@@ -34,7 +34,7 @@ Você pode importar as instruções de uso da API no Insomnia utilizando o arqui
 #### 3. Obter informações do usuário por ID
 **GET** /user/:userId
 
-cix-api.vercel.app
+https://cix-api.vercel.app
 
 
 ## Agradecimentos
