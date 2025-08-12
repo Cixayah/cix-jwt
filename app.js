@@ -38,6 +38,23 @@ app.get("/user/:id", checkToken, async (req, res) => {
     res.status(200).json({ user });
 });
 
+// Authenticated User Info - Dados do usuário autenticado
+app.get("/auth/me", checkToken, async (req, res) => {
+    try {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(" ")[1];
+        const secret = process.env.SECRET;
+        const decoded = jwt.verify(token, secret);
+        const user = await User.findById(decoded.id, '-password');
+        if (!user) {
+            return res.status(404).json({ msg: "Usuário não encontrado" });
+        }
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(400).json({ msg: "Token inválido ou erro ao buscar usuário." });
+    }
+});
+
 // Check Token - Verifica o Token
 function checkToken(req, res, next) {
     const authHeader = req.headers['authorization'];
